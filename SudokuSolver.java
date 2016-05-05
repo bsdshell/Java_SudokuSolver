@@ -17,7 +17,7 @@ import java.util.*;
 // Run time: O(9^n), 9 is the size of grid and n is the number of empty spots
 class Sudoku {
     final int gridSize = 9;
-    int[][] array;
+    int[] array;
     int[][] board = {
                     {0,0,0,2,0,0,0,0,0},
                     {0,0,0,1,0,7,0,0,0},
@@ -31,7 +31,7 @@ class Sudoku {
             };
     int numEmpty;
     public Sudoku() {
-        array = new int[gridSize*gridSize][2];
+        array = new int[gridSize*gridSize];
         numEmpty = findEmptyNumber();
     }
     public void printBoard() {
@@ -50,8 +50,8 @@ class Sudoku {
             printBoard();
         }
         else {
-            int c = array[k][0];
-            int r = array[k][1];
+            int c = array[k] / gridSize;
+            int r = array[k] % gridSize;
             for(int i=1; i<=gridSize; i++) {
                 if(checkColRow(c, r, i) && checkSquare(c, r, i)) {
                     board[c][r] = i;
@@ -72,8 +72,8 @@ class Sudoku {
             System.out.println(childLabel);
         }
         else {
-            int c = array[k][0];
-            int r = array[k][1];
+            int c = array[k] / gridSize;
+            int r = array[k] % gridSize;
             int ec = arr[0]/4;
             int er = arr[0]%4;
             String parentStr = "\"[" + ec + "," + er + "]\"";
@@ -100,8 +100,7 @@ class Sudoku {
         for(int c=0; c<gridSize; c++) {
             for(int r=0; r<gridSize; r++)
                 if(board[c][r] == 0) {
-                    array[count][0]=c;
-                    array[count][1]=r;
+                    array[count] = c*gridSize + r;
                     count++;
                 }
         }
