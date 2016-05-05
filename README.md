@@ -1,4 +1,5 @@
 **Sudoku Solver in Java**
+
     - Naive Algorithm Solves Sudoku Problem
     - Use Backtrack technic 
     - Solve Grid size 9 by 9
